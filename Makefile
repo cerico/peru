@@ -68,7 +68,6 @@ setup:
 		echo "VM not found. Creating VM first..."; \
 		echo ""; \
 		$(MAKE) _create; \
-		exit 0; \
 	fi
 	@echo "Setting up SSH keys for private repo access..."
 	@echo "Adding SSH keys to agent..."
@@ -88,13 +87,6 @@ setup:
 	@limactl shell $(VM_NAME) sudo systemctl start postgresql
 	@limactl shell $(VM_NAME) sudo systemctl enable postgresql
 	@limactl shell $(VM_NAME) sudo pg_ctlcluster 16 main start
-	@echo "Configuring PostgreSQL authentication..."
-	@limactl shell $(VM_NAME) bash -c 'sudo sed -i "s/scram-sha-256/trust/g" /etc/postgresql/*/main/pg_hba.conf'
-	@limactl shell $(VM_NAME) sudo systemctl reload postgresql
-	@echo "Creating PostgreSQL superuser for current user..."
-	@limactl shell $(VM_NAME) bash -c 'sudo -u postgres createuser -s $$(whoami) 2>/dev/null || echo "  ✓ User already exists"'
-	@echo "Granting schema permissions..."
-	@limactl shell $(VM_NAME) bash -c 'for db in $$(psql -lqt | cut -d "|" -f 1 | grep -v template | grep -v postgres | sed "s/ //g" | grep -v "^$$"); do psql $$db -c "GRANT ALL ON SCHEMA public TO $$(whoami);" 2>/dev/null || true; done'
 	@echo ""
 	@echo "✓ VM setup complete!"
 	@echo ""

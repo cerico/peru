@@ -1,4 +1,4 @@
-.PHONY: amend combine
+.PHONY: amend squash
 
 amend:
 	@if [ "$$(git branch --show-current)" = "main" ]; then \
