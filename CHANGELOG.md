@@ -1,3 +1,12 @@
+# [0.3.0](https://github.com/cerico/peru/compare/v0.2.0...v0.3.0) (2025-11-26)
+
+
+### Features
+
+* updat readme and roll install recipe into setup ([0ef3a91](https://github.com/cerico/peru/commit/0ef3a91b94730056255baa35b7eb0ac0b5e234ce))
+
+
+
 # [0.2.0](https://github.com/cerico/peru/compare/v0.1.0...v0.2.0) (2025-11-26)
 
 
