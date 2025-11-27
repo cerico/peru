@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/cerico/peru/compare/v0.3.0...v0.4.0) (2025-11-27)
+
+
+### Features
+
+* reduce vm size ([1629117](https://github.com/cerico/peru/commit/1629117663af7b2826126613dc511a29292fd3f4))
+
+
+
 # [0.3.0](https://github.com/cerico/peru/compare/v0.2.0...v0.3.0) (2025-11-26)
 
 
