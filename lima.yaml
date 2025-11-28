@@ -5,8 +5,25 @@ images:
   - location: "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-arm64.img"
     arch: "aarch64"
 cpus: 2
-memory: "2GiB"
+memory: "4GiB"
 disk: "12GiB"
 ssh:
   loadDotSSHPubKeys: true
   forwardAgent: true
+provision:
+  - mode: system
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      apt-get update
+      apt-get install -y python3.12-venv zsh
+  - mode: user
+    script: |
+      #!/bin/bash
+      set -eux -o pipefail
+      if [ ! -d ~/.oh-my-zsh ]; then
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="cloud"/' ~/.zshrc
+        echo 'export SHELL=/bin/zsh' >> ~/.zshrc
+      fi
+      sudo chsh -s /bin/zsh $(whoami)

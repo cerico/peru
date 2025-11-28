@@ -1,6 +1,3 @@
-VM_NAME := $(shell basename $(CURDIR))
-VM_USER := $(shell whoami)
-
 .PHONY: info start stop ssh setup destroy limas
 
 .DEFAULT_GOAL := _tldr
@@ -40,7 +37,7 @@ stop:
 
 ssh:
 	@echo "Connecting to VM..."
-	@limactl shell $(VM_NAME)
+	@limactl shell $(VM_NAME) zsh -l
 
 setup:
 	@echo "Checking prerequisites..."
@@ -83,6 +80,8 @@ setup:
 	@limactl shell $(VM_NAME) sudo apt install -y nodejs
 	@echo "Installing pnpm..."
 	@limactl shell $(VM_NAME) sudo npm install -g pnpm
+	@echo "Installing Playwright dependencies..."
+	@limactl shell $(VM_NAME) sudo npx -y playwright install-deps
 	@echo "Setting up PostgreSQL..."
 	@limactl shell $(VM_NAME) sudo systemctl start postgresql
 	@limactl shell $(VM_NAME) sudo systemctl enable postgresql
@@ -93,7 +92,6 @@ setup:
 	@echo "Installed versions:"
 	@limactl shell $(VM_NAME) node --version
 	@limactl shell $(VM_NAME) pnpm --version
-	@$(MAKE) ssh
 
 destroy:
 	@echo "Destroying VM..."
