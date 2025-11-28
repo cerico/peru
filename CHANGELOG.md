@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/cerico/peru/compare/v0.4.0...v0.5.0) (2025-11-28)
+
+
+### Features
+
+* modularize workflow ([dc8b51a](https://github.com/cerico/peru/commit/dc8b51a57900f05bc6e2191d9fa9a236fbf76a30))
+
+
+
 # [0.4.0](https://github.com/cerico/peru/compare/v0.3.0...v0.4.0) (2025-11-27)
 
 
